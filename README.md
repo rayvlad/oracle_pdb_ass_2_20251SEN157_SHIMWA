@@ -71,8 +71,7 @@ DROP PLUGGABLE DATABASE SH_to_delete_20251SEN157 INCLUDING DATAFILES;
 | `ORA-...: FILE_NAME_CONVERT must be specified` | `DB_CREATE_FILE_DEST` was not set on the CDB, so Oracle had no default location for the new PDB's datafiles | Queried `v$datafile` joined against `PDB$SEED`'s container to find the real seed datafile path, then supplied it explicitly via `FILE_NAME_CONVERT` |
 | "Missing or invalid file name pattern" on `FILE_NAME_CONVERT` | The path used did not match the actual filesystem path/format (Linux-style forward slashes and lowercase were used instead of the actual Windows path) | Re-ran the `v$datafile` query, copied the exact Windows path (`C:\APP\USER\PRODUCT\21C\ORADATA\XE\PDBSEED\`) character-for-character into the command |
 | "Operation not allowed from within a pluggable database" on `CREATE PLUGGABLE DATABASE` | The session's container was still set to a PDB (from a prior `ALTER SESSION SET CONTAINER` command) instead of the root | Ran `ALTER SESSION SET CONTAINER = CDB$ROOT;` before re-attempting the create command, since PDB creation/drop must be run from the root container |
-| PDB name exceeded Oracle's 30-character identifier limit | Initial temporary PDB name (`SHSHIMWA_to_delete_pdb_20251SEN157`) was too long | Shortened the name to `SH_to_delete_20251SEN157` (within the 30-character limit) |
-
+| PDB name exceeded Oracle's 30-character identifier limit | Initial temporary PDB name (`SHSHIMWA_to_delete_pdb_20251SEN157`) was too long |
 ## Integrity Statement
 
 I confirm that the work described in this README and the accompanying screenshots reflects tasks I personally performed on my own Oracle Database XE 21c environment. All commands were executed directly in SQL*Plus and Oracle EM Express, and all evidence provided is authentic and unaltered.
